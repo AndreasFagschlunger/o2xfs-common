@@ -73,8 +73,8 @@ publishing {
         maven {
             url = uri("https://repo.fagschlunger.co.at/libs-snapshot-local")
             credentials {
-                val maven_username: String by project
-                val maven_password: String by project
+                val maven_username: String? by project
+                val maven_password: String? by project
                 username = maven_username
                 password = maven_password
             }
