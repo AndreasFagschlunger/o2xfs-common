@@ -26,9 +26,9 @@
 
 env:
   global:
-    - secure: njcdEaFbkucDI/IkZsPNlGOEWyQNUXBMyQf0e/lc+D7gkujX9KnhRIf7CK+CHAvSjLig0o9Lv8DXExLl+Hmhof9WI7K9PbjWaTo3MoX1PikGjT7uU7M9oZVGYY2vwts8XQ/V7x/DPjec6i5ne9pEQMR/i7nBaMnrrT8hVRg0VGM=
-    - secure: rskcScii4WyljzS42h8vTiCG3yzbPxeGZMjoCuTXAiG2GJNCSbhvjN5yLaH8LhjTkBU+KOTHkRQr/+bJId0wOCJCmlloIPDvmymXNO/WoAelNUs+HvUD14OR5f7TtYZexa06EnivmiuGA4nvcSd8ro5lno3sVAoTjzb+NkRE5qc=
-    - secure: jVXrKq2JpxVH3xNFZqthZr8lEjmGO/qhP9OHrCEEzGXTu9e2cl2m1kYUd4EGh4LgOtrjI7bAb/JJmuI1Lo4bOnvWYX0BNogYRDcRtoYZ5rYQKOaN+GKZMfoTHacQusJ/JBL5Z6G7ZQk0r3O2A/b7+fyARvHuHV1uzIV+ciCaFXw=
+    - secure: pqLTfGxBoyMGP2YRllsLoJIj3vuqHSSAN9JTdLPlAoGshk7wvdpDbp9Y69gwxMpzJYoGUTH0vEFntJ1HU_eSmKWNEMXES07uDzOWf7QZaAQ62bvUgFr2DQC-RaWLQalbXU8chPdYWTTOXh6vmWkumIuT60kw73iakv5fq0qWBuk=
+    - secure: sDbWl6NLx_lLqCF6XvaB_hJxkChTXJ7KDLgm66F9_U2sQs3SbJSBlm50y1iNrzEGwrl6qCMrR_w4PiJOdiN8Cl003JGvqiISoyebu13zYAoLZNmxfq9kAFYsx5Va4SSokXVUwth6LZVlU4lSIcVCuuh2poGAU9LvB5AA6qWU2AE=
+    - secure: iBDcqZCd9VrQ_ywTCWgZaTYWxGDbX5hyVzXaph_dhROcTVF8aO2iU7H2Tqauc1oGj8_eT2TBlaZbjLOGtCWSs4DrntZyQsTkACOd9qWM8WHoLEYkfp-Vm2tbYHFhounFeVFXUxPGy1_n0w6J_IEOEep4JmHul6LW9tJapjkPYy0=
 
 language: java
 jdk:
