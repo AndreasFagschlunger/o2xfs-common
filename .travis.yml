@@ -24,11 +24,30 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+env:
+  global:
+    - secure: P2anDWnTZMrP82pv2LrciLDiQCR7nbYvu6FzBke73deAoHMSpz1UPEqP6OV6pcb9Lr8D7twsStc6foigMT+veX6ovA9qnuMK+v0HcqxE2Lb/tEpW0c0apQSdwvrb2IKX24ODJn55molW0p1fvT0mgLeMDZeogyuO/S9Av1n23+I=
+    - secure: sM5DpCHggGM9yIx1vIxJeDjTskfY904SOuRV5WK5ZdVeoX87SZEsqYlIOM5qvhgHpt9DIHVObcXgJSwNGG9yHPERJ2BHMe1LumBNdhaFVDVxkQRU5+8DBLEDUAcXgvb2TMMcnOFF8zX6t9wKSxIChLwZUAot9b07mr2XeNmKqnM=
+    - secure: thqxGK4cGN432LZxXskOAd8RdxU3/FeJTDL1HNWdhZbthdbfveGLs6xBhlBr6FQisdnSkHLj9Ho4aRGIGY1UNjV1MSWKdKRaZ1TBqyYYMZkkQw2sizEAhaptmKpxrz1a7h6NnGaHgLLLzlsEQstzZzeon9mM7YNEtBJhvSjBFYA=
+
 language: java
 jdk:
   - openjdk8
 before_install:
   - chmod +x gradlew
 install: ./gradlew --version
-script:
-  - ./gradlew build
+jobs:
+  include:
+    - stage: Bump version
+      if: branch = master
+      script: ./deploy.sh bump
+    - stage: compile
+      script: ./gradlew classes
+    - stage: test
+      script: ./gradlew test
+    - stage: push
+      if: branch = master
+      script: ./deploy.sh push
+    - stage: deploy
+      if: branch IN (master, develop)
+      script: ./gradlew publish
