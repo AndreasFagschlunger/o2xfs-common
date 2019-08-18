@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
 
-VERSION=$(./gradlew -s properties | grep 'version: ' | sed -e 's/version: //')
+generate_VERSION() {
+  VERSION=$(./gradlew -s properties | grep 'version: ' | sed -e 's/version: //')
+}
 
 increment_patch_level() {
   local baseVersion=${VERSION/-SNAPSHOT/}
@@ -54,11 +56,19 @@ git_tag_and_push() {
   fi
 }
 
-if [ "$1" == "bump" ]; then
+if [ "$TRAVIS_BRANCH" == "master" ]; then
+  generate_VERSION
   increment_patch_level
-elif [ "$1" == "push" ]; then
+fi
+
+./gradlew build
+
+if [ "$TRAVIS_BRANCH" == "master" ]; then
   git_config
   git_add_commit
   git_tag_and_push
 fi
 
+if [ "$TRAVIS_BRANCH" == "master" ] || [ "$TRAVIS_BRANCH" == "develop" ]; then
+  ./gradlew publish
+fi

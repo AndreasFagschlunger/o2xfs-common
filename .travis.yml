@@ -36,18 +36,5 @@ jdk:
 before_install:
   - chmod +x gradlew
 install: ./gradlew --version
-jobs:
-  include:
-    - stage: Bump version
-      if: branch = master
-      script: ./deploy.sh bump
-    - stage: compile
-      script: ./gradlew classes
-    - stage: test
-      script: ./gradlew test
-    - stage: push
-      if: branch = master
-      script: ./deploy.sh push
-    - stage: deploy
-      if: branch IN (master, develop)
-      script: ./gradlew publish
+script:
+  - ./build.sh
