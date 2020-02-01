@@ -27,10 +27,12 @@
 
 package at.o2xfs.common;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Arrays;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class BytesTest {
 
@@ -38,7 +40,7 @@ public class BytesTest {
 	public final void toInt() {
 		for (int expected = 0; expected <= 255; expected++) {
 			int actual = Bytes.toInt((byte) expected);
-			Assert.assertEquals(expected, actual);
+			assertEquals(expected, actual);
 		}
 	}
 
@@ -47,7 +49,7 @@ public class BytesTest {
 		byte[] input = Hex.decode("123456");
 		byte[] expecteds = Hex.decode("1234");
 		byte[] actuals = Bytes.left(input, 2);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
 	@Test
@@ -55,56 +57,56 @@ public class BytesTest {
 		byte[] input = Hex.decode("123456");
 		byte[] expecteds = Hex.decode("3456");
 		byte[] actuals = Bytes.right(input, 2);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
 	@Test
 	public final void simpleLeftPad() {
 		byte[] expecteds = Hex.decode("001234");
 		byte[] actuals = Bytes.leftPad(Hex.decode("1234"), 3);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
 	@Test
 	public final void simpleLeftPadWithPadByte() {
 		byte[] expecteds = Hex.decode("FF1234");
 		byte[] actuals = Bytes.leftPad(Hex.decode("1234"), 3, 0xFF);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
 	@Test
 	public final void leftPadEmptyBytesWith0xFF() {
 		byte[] expecteds = Hex.decode("FFFFFFFFFF");
 		byte[] actuals = Bytes.leftPad(Bytes.EMPTY, 5, 0xFF);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
 	@Test
 	public final void simpleRightPad() {
 		byte[] expecteds = Hex.decode("123400");
 		byte[] actuals = Bytes.rightPad(Hex.decode("1234"), 3);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
 	@Test
 	public final void simpleRightPadWithPadByte() {
 		byte[] expecteds = Hex.decode("1234FF");
 		byte[] actuals = Bytes.rightPad(Hex.decode("1234"), 3, 0xFF);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
 	@Test
 	public final void testMid() {
 		byte[] expecteds = Hex.decode("34");
 		byte[] actuals = Bytes.mid(Hex.decode("123456"), 1, 1);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
 	@Test
 	public final void midCopy() {
 		byte[] expecteds = Hex.decode("123456");
 		byte[] actuals = Bytes.mid(expecteds, 0, expecteds.length);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
 	@Test
@@ -112,7 +114,7 @@ public class BytesTest {
 		for (int i = 0; i <= 255; i++) {
 			String expected = leftPad(Integer.toBinaryString(i), 8, '0');
 			String actual = Bytes.toBinaryString(new byte[] { (byte) i });
-			Assert.assertEquals(expected, actual);
+			assertEquals(expected, actual);
 		}
 	}
 
@@ -121,7 +123,7 @@ public class BytesTest {
 		byte[] bytes = Hex.decode("1234");
 		String expected = "00010010 00110100";
 		String actual = Bytes.toBinaryString(bytes, ' ');
-		Assert.assertEquals(expected, actual);
+		assertEquals(expected, actual);
 	}
 
 	private String leftPad(String value, int length, char padChar) {
@@ -131,8 +133,7 @@ public class BytesTest {
 		}
 		char[] newChars = new char[length];
 		Arrays.fill(newChars, padChar);
-		System.arraycopy(oldChars, 0, newChars, newChars.length
-				- oldChars.length, oldChars.length);
+		System.arraycopy(oldChars, 0, newChars, newChars.length - oldChars.length, oldChars.length);
 		return new String(newChars);
 	}
 }

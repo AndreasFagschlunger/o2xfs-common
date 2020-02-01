@@ -27,8 +27,9 @@
 
 package at.o2xfs.common;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ArrayUtilTest {
 
@@ -37,7 +38,7 @@ public class ArrayUtilTest {
 		byte[] expecteds = new byte[] {};
 		byte[] actuals = new byte[] {};
 		ArrayUtil.reverse(actuals);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
 	@Test
@@ -45,7 +46,7 @@ public class ArrayUtilTest {
 		byte[] expecteds = new byte[] { 4, 3, 2, 1 };
 		byte[] actuals = new byte[] { 1, 2, 3, 4 };
 		ArrayUtil.reverse(actuals);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
 	@Test
@@ -53,6 +54,6 @@ public class ArrayUtilTest {
 		byte[] expecteds = new byte[] { 3, 2, 1 };
 		byte[] actuals = new byte[] { 1, 2, 3 };
 		ArrayUtil.reverse(actuals);
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 }
