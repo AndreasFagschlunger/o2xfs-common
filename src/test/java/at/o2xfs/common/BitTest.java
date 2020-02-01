@@ -27,34 +27,36 @@
 
 package at.o2xfs.common;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
 
 public class BitTest {
 
 	@Test
 	public final void testAllBitsSet() {
 		final byte b = Hex.decode("ff")[0];
-		Assert.assertTrue(Bit.isSet(b, Bit.B1));
-		Assert.assertTrue(Bit.isSet(b, Bit.B2));
-		Assert.assertTrue(Bit.isSet(b, Bit.B3));
-		Assert.assertTrue(Bit.isSet(b, Bit.B4));
-		Assert.assertTrue(Bit.isSet(b, Bit.B5));
-		Assert.assertTrue(Bit.isSet(b, Bit.B6));
-		Assert.assertTrue(Bit.isSet(b, Bit.B7));
-		Assert.assertTrue(Bit.isSet(b, Bit.B8));
+		assertTrue(Bit.isSet(b, Bit.B1));
+		assertTrue(Bit.isSet(b, Bit.B2));
+		assertTrue(Bit.isSet(b, Bit.B3));
+		assertTrue(Bit.isSet(b, Bit.B4));
+		assertTrue(Bit.isSet(b, Bit.B5));
+		assertTrue(Bit.isSet(b, Bit.B6));
+		assertTrue(Bit.isSet(b, Bit.B7));
+		assertTrue(Bit.isSet(b, Bit.B8));
 	}
 
 	@Test
 	public final void testBit1() {
-		Assert.assertTrue(Bit.isSet((byte) 1, Bit.B1));
-		Assert.assertFalse(Bit.isSet((byte) 0, Bit.B1));
+		assertTrue(Bit.isSet((byte) 1, Bit.B1));
+		assertFalse(Bit.isSet((byte) 0, Bit.B1));
 	}
 
 	@Test
 	public final void testBit8() {
 		final byte b = Hex.decode("f0")[0];
-		Assert.assertTrue(Bit.isSet(b, Bit.B8));
+		assertTrue(Bit.isSet(b, Bit.B8));
 	}
 
 }

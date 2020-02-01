@@ -27,21 +27,23 @@
 
 package at.o2xfs.common;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class HexTest {
 
 	@Test
 	public final void testEncode() {
 		for (int i = Byte.MIN_VALUE; i <= Byte.MAX_VALUE; i++) {
-			final String expected = String.format("%02X",
-					Integer.valueOf(i & 0xFF));
+			final String expected = String.format("%02X", Integer.valueOf(i & 0xFF));
 			final String actual = Hex.encode(new byte[] { (byte) i });
-			Assert.assertEquals(expected, actual);
+			assertEquals(expected, actual);
 		}
 	}
 
@@ -49,12 +51,9 @@ public class HexTest {
 	public final void testDecodeOneByte() {
 		for (int i = Byte.MIN_VALUE; i <= Byte.MAX_VALUE; i++) {
 			final byte[] expecteds = new byte[] { (byte) i };
-			final String hexString = String.format("%02x",
-					Integer.valueOf(i & 0xFF));
-			Assert.assertArrayEquals(expecteds,
-					Hex.decode(hexString.toLowerCase()));
-			Assert.assertArrayEquals(expecteds,
-					Hex.decode(hexString.toUpperCase()));
+			final String hexString = String.format("%02x", Integer.valueOf(i & 0xFF));
+			assertArrayEquals(expecteds, Hex.decode(hexString.toLowerCase()));
+			assertArrayEquals(expecteds, Hex.decode(hexString.toUpperCase()));
 		}
 	}
 
@@ -64,10 +63,8 @@ public class HexTest {
 			final byte[] expecteds = new byte[] { (byte) i, (byte) j };
 			String hexString = String.format("%02x", i & 0xFF);
 			hexString += String.format("%02x", j & 0xFF);
-			Assert.assertArrayEquals(expecteds,
-					Hex.decode(hexString.toLowerCase()));
-			Assert.assertArrayEquals(expecteds,
-					Hex.decode(hexString.toUpperCase()));
+			assertArrayEquals(expecteds, Hex.decode(hexString.toLowerCase()));
+			assertArrayEquals(expecteds, Hex.decode(hexString.toUpperCase()));
 		}
 	}
 
@@ -81,29 +78,29 @@ public class HexTest {
 		for (Map.Entry<Integer, String> entry : values.entrySet()) {
 			final String expected = entry.getValue();
 			final String actual = Hex.encode(entry.getKey().intValue());
-			Assert.assertEquals(expected, actual);
+			assertEquals(expected, actual);
 		}
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public final void testDecodeOddString() {
-		Hex.decode("123");
+		assertThrows(IllegalArgumentException.class, () -> Hex.decode("123"));
 	}
 
 	@Test
 	public final void testDecodeEmptyString() {
 		final byte[] expecteds = new byte[0];
 		final byte[] actuals = Hex.decode("");
-		Assert.assertArrayEquals(expecteds, actuals);
+		assertArrayEquals(expecteds, actuals);
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test
 	public final void testDecodeNull() {
-		Hex.decode(null);
+		assertThrows(NullPointerException.class, () -> Hex.decode(null));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public final void testDecodeWithIllegalCharacter() {
-		Hex.decode("12G3");
+		assertThrows(IllegalArgumentException.class, () -> Hex.decode("12G3"));
 	}
 }
