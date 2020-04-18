@@ -32,7 +32,7 @@ env:
 
 language: java
 jdk:
-  - openjdk8
+  - openjdk13
 install: ./gradlew --version
 script:
   - ./build.sh
